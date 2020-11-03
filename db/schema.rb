@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201030192006) do
+ActiveRecord::Schema.define(version: 20201103205257) do
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer "movie_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["movie_id"], name: "index_favorites_on_movie_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
 
   create_table "movies", force: :cascade do |t|
     t.string "title"
@@ -27,12 +36,12 @@ ActiveRecord::Schema.define(version: 20201030192006) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.string "name"
     t.integer "stars"
     t.text "comment"
     t.integer "movie_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
     t.index ["movie_id"], name: "index_reviews_on_movie_id"
   end
 
@@ -42,6 +51,7 @@ ActiveRecord::Schema.define(version: 20201030192006) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "admin"
   end
 
 end
