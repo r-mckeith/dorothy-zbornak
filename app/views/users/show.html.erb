@@ -1,3 +1,5 @@
+<% content_for(:title, @user.name) %>
+
 <article id="user">
   <header>
     <h1><%= @user.name %></h1>
@@ -21,16 +23,19 @@
   </ol>
 <% end %>
 
-<% if @favorite_movies.any? %>
+<% content_for :side do %>
+  <% if @favorite_movies.any? %>
   <h3>Favorite Movies</h3>
   <ul>
-   <% @favorite_movies.each do |movie| %>
+    <% @favorite_movies.each do |movie| %>
      <li>
        <%= link_to movie.title, movie %>
      </li>
-   <% end %>
+    <% end %>
   </ul>
+  <% end %>
 <% end %>
+
 
 
 <footer>
